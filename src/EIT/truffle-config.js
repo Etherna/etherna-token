@@ -1,6 +1,15 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
+const LedgerWalletProvider = require('truffle-ledger-provider');
 const fs = require('fs');
 const mnemonic = fs.readFileSync(".secret").toString().trim();
+
+const ledgerOptions = {
+  networkId: 137, // polygon mainnet
+  path: "m/44'/60'/0'/0", // ledger live default derivation path
+  askConfirm: false,
+  accountsLength: 1,
+  accountsOffset: 0,
+};
 
 module.exports = {
   networks: {
@@ -10,7 +19,7 @@ module.exports = {
       network_id: "*",       // Any network (default: none)
     },
     matic: {
-      provider: () => new HDWalletProvider(mnemonic, `https://polygon-rpc.com/`),
+      provider: () => new LedgerWalletProvider(ledgerOptions, `https://polygon-rpc.com/`),
       network_id: 137,
       confirmations: 2,
       timeoutBlocks: 200,
