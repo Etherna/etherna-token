@@ -1,6 +1,7 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const fs = require('fs');
-const mnemonic = fs.readFileSync(".secret").toString().trim();
+const mnemonic = fs.readFileSync("secrets/mnemonic").toString().trim();
+const polygonscanApiKey = fs.readFileSync("secrets/psApiKey").toString().trim();
 
 module.exports = {
   networks: {
@@ -33,6 +34,13 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
+      version: "0.8.12",
     }
+  },
+  
+  plugins: ['truffle-plugin-verify'],
+
+  api_keys: {
+    polygonscan: polygonscanApiKey
   }
 }
