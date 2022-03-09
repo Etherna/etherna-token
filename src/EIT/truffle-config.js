@@ -15,7 +15,8 @@ module.exports = {
       network_id: 137,
       confirmations: 2,
       timeoutBlocks: 200,
-      skipDryRun: true
+      skipDryRun: true,
+      gasPrice: 40000000000
     },
     mumbai: {
       provider: () => new HDWalletProvider(mnemonic, `https://matic-mumbai.chainstacklabs.com`),
